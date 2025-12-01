@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Shopping Cart</title>
+  <style>
+    body {
+      background-color: #d2b48c; /* Brown background */
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .item {
+      margin-bottom: 10px;
+    }
+    .cart {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #000;
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Shopping Cart</h1>
+
+  <!-- Products Section -->
+  <div>
+    <div class="item">
+      Coffee - $5.99 <button onclick="addToCart('Coffee', 5.99)">Add to Cart</button>
+    </div>
+    <div class="item">
+      Bread - $2.49 <button onclick="addToCart('Bread', 2.49)">Add to Cart</button>
+    </div>
+    <div class="item">
+      Cake - $10.99 <button onclick="addToCart('Cake', 10.99)">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- Cart Section -->
+  <div class="cart">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <p>Total: $<span id="total-price">0.00</span></p>
+  </div>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      const totalPrice = document.getElementById('total-price');
+      cartItems.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price;
+        cartItems.innerHTML += `<p>${item.name} - $${item.price.toFixed(2)}</p>`;
+      });
+      totalPrice.textContent = total.toFixed(2);
+    }
+  </script>
+</body>
+</html>
